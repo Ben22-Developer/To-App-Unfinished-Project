@@ -4,7 +4,7 @@ function taskConstructor (taskTitle) {
     this.addATask = function (description,date) {
         const aTask = {
             description:description,
-            date:date
+            date:date 
         };
         this.tasksToDoArray.push(aTask);
     }
@@ -343,6 +343,8 @@ const userInterface = (() => {
             didTasks.push(theTask);
         }
         allAddedTasks = document.querySelectorAll('.theTask');
+        console.log(didTasks);
+        console.log(allAddedTasks);
     }
 
     return{showMenuContent};
