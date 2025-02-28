@@ -44,8 +44,6 @@ const crudTask = (() => {
         return allTasksArray[objectIndex].tasksToDoArray[taskIndex];
     }
 
-//--->/*Function to mark a task done*/
-
     //function to delete a created task
     function removeCreatedTask (taskTitle,taskIndex) {
         const objectIndex = objectSearch(taskTitle);
@@ -213,13 +211,23 @@ const userInterface = (() => {
         //the nbr which appears first in theTask class article check the returned value from ==> (theTaskToDoDOMManipulation)
         const index = parseInt(e.target.parentElement.previousElementSibling.previousElementSibling.children[0].innerText);
         if (didTasks.length && e.target.value !== 'Task Did') {
-            let  isIndexDid;
-            if (allAddedTasks[toTrackToDoTaskIndex(index)].parentElement.parentElement === allSections[activeSection]) {
-                isIndexDid = didTasks.includes(allAddedTasks[toTrackToDoTaskIndex(index)]);
-                console.log(didTasks);
-            }
+            let isIndexDid;
+            //if (allAddedTasks[toTrackToDoTaskIndex(index)].parentElement.parentElement === allSections[activeSection]) {
+                //isIndexDid = didTasks.includes(allAddedTasks[toTrackToDoTaskIndex(index)]);
+                for (let i = 0; i < didTasks.length; i++) {
+                    console.log(allAddedTasks[toTrackToDoTaskIndex(index)].children[0].children[1]);
+                    console.log(allAddedTasks[toTrackToDoTaskIndex(index)].children[0].children[1].classList.contains('taskDid'));
+                    console.log(didTasks[i]);
+                    if ((didTasks[i].innerText == allAddedTasks[toTrackToDoTaskIndex(index)].children[0].children[1].innerText) && (allAddedTasks[toTrackToDoTaskIndex(index)].children[0].children[1].classList.contains('taskDid'))) {
+                        isIndexDid = true;
+                        break;
+                    }
+                }
+                
+                //console.log(didTasks[0]);
+            //}
 
-            console.log(allAddedTasks);
+            console.log(isIndexDid);
 
 
             if (isIndexDid) {
@@ -340,11 +348,9 @@ const userInterface = (() => {
         }
         else {
             theTask.children[0].children[1].classList.add('taskDid');
-            didTasks.push(theTask);
+            didTasks.push(theTask.children[0].children[1]);
         }
         allAddedTasks = document.querySelectorAll('.theTask');
-        console.log(didTasks);
-        console.log(allAddedTasks);
     }
 
     return{showMenuContent};
