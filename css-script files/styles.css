@@ -29,18 +29,18 @@ body {
 h2,h1,p {
     text-align: center;
 }
-input[type="button"],input[type="Submit"],.emojiButton {
+input[type="button"],input[type="Submit"],input[type="reset"],button,.emojiButton {
     border: none;
     background-color: rgb(230, 201, 143);
     transition:transform 500ms,background-color 500ms;
 }
-input[type="button"]:hover,input[type="Submit"]:hover,.emojiButton:hover {
+input[type="button"]:hover,input[type="Submit"]:hover,input[type="reset"]:hover,button:hover,.emojiButton:hover {
     cursor: pointer;
     transform: translateY(-10%);
     background-color:rgba(230, 201, 143, 0.63);
 }
 
-input[type="button"],input[type="Submit"]:active,.emojiButton:active {
+input[type="button"],input[type="Submit"]:active,input[type="reset"]:active,button:active,.emojiButton:active {
     cursor: pointer;
     transform: translateY(0);
     background-color:rgba(230, 201, 143);
@@ -95,6 +95,7 @@ main {
     text-align: center;
     background-color: antiquewhite;
     height: 100vh;
+    overflow-y: scroll;
     transition:transform 500ms,visibility 500ms;
     h2 {
         padding: 1rem 0;
@@ -118,10 +119,10 @@ main {
                 flex-grow: 1;
                 padding:1rem 0;
             }
-            .taskCount,.task {
+            .taskCount,.task,#addTaskSpan {
                 font-weight: bold;
             }
-            .taskCount {
+            .taskCount,#addTaskSpan {
                 position: relative;
                 right: 0;
                 top: 0;
@@ -130,6 +131,36 @@ main {
                 border: .2rem solid;
                 border-radius: 0 .5rem .5rem 0;
                 font-size: 1.5rem;
+            }
+        }
+        #addTaskListItem {
+            margin-top: 2rem;
+            border: unset;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            #addTaskSpan {
+                background-color: rgb(230, 201, 143);
+                border: unset;
+                height: max-content;
+            }
+        }
+        .addedTaskType {
+            margin-top: 2rem;
+            position: relative;
+            div {
+                background-color:brown;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%) translateY(100%);
+                display: flex;
+                gap:-2rem;
+                select {
+                   padding: .2rem 1rem;
+                   text-wrap: nowrap;
+                   font-weight: bold;
+                }
             }
         }
     }
@@ -241,11 +272,15 @@ input[type="date"] {
     }
 }
 
-#ifSureToDelete {
+#ifSureToDelete,#otherTaskTypeForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    z-index: 5;
+}
+
+#ifSureToDelete {
     p,h2 {
         color: white;
     }
@@ -255,6 +290,32 @@ input[type="date"] {
             padding: .5rem 2rem;
             font-weight: bold;
             color: unset;
+        }
+    }
+}
+
+#otherTaskTypeForm {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: brown;
+    width: max-content;
+    padding: .7rem 2rem;
+    text-align: center;
+    h3 {
+        color: white;
+    }
+    input[type="text"] {
+        height: 3rem;
+        width: 100%;
+        font-size: 1rem;
+    }
+    #buttons {
+        input {
+            font-size: 1.1rem;
+            padding: .5rem 2rem;
+            font-weight: bold;
         }
     }
 }
@@ -299,6 +360,9 @@ input[type="date"] {
     }
 }
 @media (width<375px) {
+    aside {
+        width: 100%;
+    }
     .emojiButton {
         padding: .5rem .2rem!important;
     }

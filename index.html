@@ -24,10 +24,10 @@
             <ul id="menuContentList">
                 <li value="0"><span class="task">Work Tasks</span><span class="taskCount">0</span></li>
                 <li value="1"><span class="task">Personal Tasks</span><span class="taskCount">0</span></li>
-                <li value="2"><span class="task">Other Tasks</span><span class="taskCount">0</span></li>
+                <li value="3" id="addTaskListItem"><span class="task"><ins>Add Another Type Of Task</ins></span><span id="addTaskSpan"><ins>+</ins></span></li>
             </ul>
         </aside>
-        <section class="tasks" id="workTasksSection">
+        <section class="tasks">
             <h2>Work Tasks</h2>
             <form id="form">
                 <textarea placeholder="Enter your work task here or click the menu icon for more task options, click the '+' button to add a task"></textarea>
@@ -36,7 +36,7 @@
             </form>
             <div></div>
         </section>
-        <section class="tasks hidden" id="personalTasksSection">
+        <section class="tasks hidden">
             <h2>Personal Tasks</h2>
             <form id="form">
                 <textarea placeholder="Enter your personal task here or click the menu icon for more task options, click the '+' button to add a task"></textarea>
@@ -46,25 +46,6 @@
             <div></div>
             </article>
         </section>
-
-
-        <!-- to be removed after testing-->
-        
-        
-        <section class="tasks hidden" id="otherTasksSection">
-            <h2>Other Tasks</h2>
-            <form id="form">
-                <textarea placeholder="Enter your task here"></textarea>
-                <input type="date" name="deadlineDate">
-                <input type="submit" value="+" class="addTask">
-            </form>
-            <div></div>
-        </section>
-
-
-
-
-
     </main>
 </body>
 </html>
