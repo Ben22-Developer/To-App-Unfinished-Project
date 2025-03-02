@@ -258,6 +258,10 @@ const userInterface = (() => {
             alert(newTaskType);
             return 0;
         }
+        if (!crudTask.objectSearch(newTaskType.taskTitle)) {
+            alert('Unexpected error while trying to add the new task please try again!')
+            return 0;
+        }
         const li = document.createElement('li');
         li.className = 'addedTaskType';
         li.value = crudTask.objectSearch(newTaskType.taskTitle);
