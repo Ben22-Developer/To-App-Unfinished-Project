@@ -431,10 +431,10 @@ const userInterface = (() => {
         addTaskBtns = document.querySelectorAll('.addTask');
         allAddedTasks = document.querySelectorAll('.theTask');
         closePopOutDiv(document.getElementById('ifSureToDelete'));
-        console.log(menuList);
-        console.log(allSections);
-        console.log(addTaskBtns);
-        console.log(allAddedTasks);
+        // console.log(menuList);
+        // console.log(allSections);
+        // console.log(addTaskBtns);
+        // console.log(allAddedTasks);
     }
 
     //to add a task
@@ -451,8 +451,8 @@ const userInterface = (() => {
         const createdTask = crudTask.createTask(allSections[activeSection].children[0].innerText,
             e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value);
 
-        console.log(allSections[activeSection].children[0].innerText,
-                e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value);
+        /*console.log(allSections[activeSection].children[0].innerText,
+                e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value);*/
 
 
         e.target.previousElementSibling.previousElementSibling.value = '';
