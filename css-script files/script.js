@@ -32,7 +32,6 @@ const crudTask = (() => {
 
     //adding a fresh new task in to do app in existing task type
     function createTask (taskTitle,description,date) {
-        console.log(taskTitle,description,date);
         //const objectIndex = objectSearch(taskTitle);
         allTasksArray[objectSearch(taskTitle)].addATask(description,date);
         return allTasksArray[objectSearch(taskTitle)].latestTask();
@@ -253,6 +252,12 @@ const userInterface = (() => {
         if (!document.getElementById('inputAnotherTypeOfTask').value) {
             alert("Enter the name of your task type please!");
             return 0;
+        }
+        const regex = /\s./g;
+        //to test if there's only 2 words in a task name and add word 'Tasks' if it's the case
+        const test = regex.test(document.getElementById('inputAnotherTypeOfTask').value);
+        if (!test) {
+            document.getElementById('inputAnotherTypeOfTask').value += ' Tasks';
         }
         const newTaskType = crudTask.addingNewTaskType(document.getElementById('inputAnotherTypeOfTask').value);
         if (typeof newTaskType === 'string') {
