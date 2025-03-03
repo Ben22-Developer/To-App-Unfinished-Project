@@ -53,12 +53,14 @@ const crudTask = (() => {
 
     //adding a new task type (object) in allTasksArray
     function addingNewTaskType (nameOfTaskType) {
+        console.log(nameOfTaskType);
         const titlesArray = allTasksArray.map(task => task.taskTitle);
         const isItInTaskArray = titlesArray.includes(nameOfTaskType);
         if (isItInTaskArray) {
             return "Sorry we can't insert tasks with the same name.";
         }
         allTasksArray.push(new taskConstructor(nameOfTaskType));
+        console.log(allTasksArray[allTasksArray.length - 1].taskTitle);
         return allTasksArray[allTasksArray.length - 1];
     }
 
@@ -453,31 +455,25 @@ const userInterface = (() => {
             return;
         }
         const createdTask = crudTask.createTask(activeSection,
-            e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value);
-
-        /*console.log(activeSection,
-                e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value);*/
-
+            e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value)
 
         e.target.previousElementSibling.previousElementSibling.value = '';
         e.target.previousElementSibling.value = '';
 
+        menuList[activeSection].children[1].innerText = createdTask.lastInputtedIndex;
 
+        const divTaskContainer = allSections[activeSection].querySelector('div');
 
-            menuList[activeSection].children[1].innerText = createdTask.lastInputtedIndex;
-
-            const divTaskContainer = allSections[activeSection].querySelector('div');
-
-            if (divTaskContainer.id !== `${allTasksArray[activeSection].taskTitle}`) {
-                divTaskContainer.setAttribute('id',`${allTasksArray[activeSection].taskTitle}`);
-            }
-            divTaskContainer.innerHTML += theTaskToDoDOMManipulation(createdTask.lastInputtedIndex,createdTask.lastInputtedTask.description,createdTask.lastInputtedTask.date);
-            allAddedTasks = document.querySelectorAll('.theTask');
-            allEmojiButtons = document.querySelectorAll('.emojiButton');
-            allEmojiButtons.forEach(emojiButton => {
-                emojiButton.addEventListener('click',aTaskManipulation);
-            })
+        if (divTaskContainer.id !== `${allTasksArray[activeSection].taskTitle}`) {
+            divTaskContainer.setAttribute('id',`${allTasksArray[activeSection].taskTitle}`);
         }
+        divTaskContainer.innerHTML += theTaskToDoDOMManipulation(createdTask.lastInputtedIndex,createdTask.lastInputtedTask.description,createdTask.lastInputtedTask.date);
+        allAddedTasks = document.querySelectorAll('.theTask');
+        allEmojiButtons = document.querySelectorAll('.emojiButton');
+        allEmojiButtons.forEach(emojiButton => {
+            emojiButton.addEventListener('click',aTaskManipulation);
+        })
+    }
 
     //function to add task to DOM, update DOM task, helps to check the DOM task we're working with ... 
     function theTaskToDoDOMManipulation(index,description,date) {
