@@ -32,6 +32,7 @@ const crudTask = (() => {
 
     //adding a fresh new task in to do app in existing task type
     function createTask (taskTitle,description,date) {
+        console.log(taskTitle,description,date);
         //const objectIndex = objectSearch(taskTitle);
         allTasksArray[objectSearch(taskTitle)].addATask(description,date);
         return allTasksArray[objectSearch(taskTitle)].latestTask();
@@ -151,7 +152,7 @@ const userInterface = (() => {
         const otherTaskTypeForm = document.createElement('form');
         UIDOMFormOtherTaskType(otherTaskTypeForm);
         otherTaskTypeForm.addEventListener('mouseover',removingDocListenerToAddOtherTypeTask);
-        otherTaskTypeForm.addEventListener('mouseout',addingBackDocListenerInAddingOtherTypeTask);
+        //otherTaskTypeForm.addEventListener('mouseout',addingBackDocListenerInAddingOtherTypeTask);
         otherTaskTypeForm.querySelector('#buttons').addEventListener('click',toAddNewTaskTypeOrDismiss);
     }
 
@@ -258,7 +259,7 @@ const userInterface = (() => {
             alert(newTaskType);
             return 0;
         }
-        if (!crudTask.objectSearch(newTaskType.taskTitle)) {
+        if (!crudTask.objectSearch(document.getElementById('inputAnotherTypeOfTask').value)) {
             alert('Unexpected error while trying to add the new task please try again!')
             return 0;
         }
@@ -304,7 +305,6 @@ const userInterface = (() => {
         document.querySelector('main').append(section);
         allSections = document.querySelectorAll('section');
         addTaskBtns = document.querySelectorAll('.addTask');
-
     }
 
     //removing docListener to help user rename or delete an addedTaskType #manipulate the addedTaskType
@@ -342,6 +342,7 @@ const userInterface = (() => {
 
     //to manipulate by changing an addedTaskType name or deleting it
     function addedTaskTypeDOMManipulation (e) {
+        addDocListenerForAddedTaskManipulation(e);
         //example if addedTaskType is Lonely Lion, This is the DOM traversal from rename/delete addedTaskType buttons towards the innerText of 'Lonely Lion'
         const taskTypeTitle = e.target.parentElement.previousElementSibling.previousElementSibling.innerText;
         switch(e.target.value) {
