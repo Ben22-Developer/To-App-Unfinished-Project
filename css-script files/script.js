@@ -31,10 +31,10 @@ const allTasksArray = [
 const crudTask = (() => {
 
     //adding a fresh new task in to do app in existing task type
-    function createTask (taskIndex,description,date) {
+    function createTask (taskTitle,description,date) {
         //const objectIndex = objectSearch(taskTitle);
-        allTasksArray[taskIndex].addATask(description,date);
-        return allTasksArray[taskIndex].latestTask();
+        allTasksArray[objectSearch(taskTitle)].addATask(description,date);
+        return allTasksArray[objectSearch(taskTitle)].latestTask();
     }
     
     //function to update or edit task
@@ -53,14 +53,12 @@ const crudTask = (() => {
 
     //adding a new task type (object) in allTasksArray
     function addingNewTaskType (nameOfTaskType) {
-        console.log(nameOfTaskType);
         const titlesArray = allTasksArray.map(task => task.taskTitle);
         const isItInTaskArray = titlesArray.includes(nameOfTaskType);
         if (isItInTaskArray) {
             return "Sorry we can't insert tasks with the same name.";
         }
         allTasksArray.push(new taskConstructor(nameOfTaskType));
-        console.log(allTasksArray[allTasksArray.length - 1].taskTitle);
         return allTasksArray[allTasksArray.length - 1];
     }
 
@@ -74,26 +72,24 @@ const crudTask = (() => {
         }
         allTasksArray.pop();
         allTasksArray.splice(objectIndex,1,newNameOfTaskType);
-        //if (objProperties) {
-            allTasksArray[objectIndex].tasksToDoArray.push(objProperties);
-        //}
+        allTasksArray[objectIndex].tasksToDoArray.push(objProperties);
         return allTasksArray[objectIndex];
     }
 
     //removing the added task type not default
     function deleteAddedTaskType (nameOfTaskType) {
-        //if (typeof objectSearch(nameOfTaskType) === 'number') {
-            const indexDeleted = objectSearch(nameOfTaskType);
-            allTasksArray.splice(indexDeleted,1);
-            return indexDeleted;
-        //}
+        const indexDeleted = objectSearch(nameOfTaskType);
+        allTasksArray.splice(indexDeleted,1);
+        return indexDeleted;
     }
-
 
     //searching for the object's index according to it's name/task title
     function objectSearch (taskTitle) {
+        const regex = /\S/g;
+        taskTitle = taskTitle.match(regex).join('');
         for (i = 0; i < allTasksArray.length; i++) {
-            if (allTasksArray[i].taskTitle === taskTitle) {
+            const task = allTasksArray[i].taskTitle.match(regex).join('');
+            if (task === taskTitle) {
                 return i;
             }
         }
@@ -454,7 +450,7 @@ const userInterface = (() => {
             window.alert("Insert the date to accompilish the taken task please.");
             return;
         }
-        const createdTask = crudTask.createTask(activeSection,
+        const createdTask = crudTask.createTask(allSections[activeSection].children[0].innerText,
             e.target.previousElementSibling.previousElementSibling.value, e.target.previousElementSibling.value)
 
         e.target.previousElementSibling.previousElementSibling.value = '';
